@@ -4,17 +4,16 @@ const multer = require('multer');
 var path = require('path');
 
 // storage engine
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: '../public/uploads',
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now()+ path.extname(file.originalname))
   }
 });
 
-var upload = multer({ storage: storage });
+const upload = multer({ storage: storage }).single('file');
 
 
-router.use(upload.array());
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.render('pages/news/index');
@@ -23,8 +22,8 @@ router.get('/create', function (req, res, next) {
   res.render('pages/news/create', { success: req.session.success, errors: req.session.errors });
   req.session.errors = null;
 });
-router.post('/save', upload.single('file'), function (req, res, next) {
-  console.log('req parameters' +req.body);
+router.post('/save', function (req, res, next) {
+console.log(req.body);
   var title = req.body.title;
   var short_description = req.body.short_description;
   var long_description = req.body.long_description;

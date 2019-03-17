@@ -12,7 +12,6 @@ var expressSession = require('express-session');
 var multer = require('multer');
 var app = express();
 var upload = multer();
-app.use(upload.array()); 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
