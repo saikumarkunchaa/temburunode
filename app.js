@@ -9,10 +9,11 @@ var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/news');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
-var multer = require('multer');
 var app = express();
-var upload = multer();
+var mysql = require('./dbConnection');
+var cors =  require('cors');
 
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
